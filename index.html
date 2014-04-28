@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="./bower_components/jquery/dist/jquery.min.js"></script>
+<style>
+body {
+	background-color: #333333;
+}
+.badAlienShip {
+	width: 40px;
+	height: 40px;
+	background-color: blue;
+	border: 2px solid white;
+}
+</style>
+<script>
+var numShips = 0;
+var animatieLoopTimer = null;
+var shipAdder = null;
+function init() {
+	console.log("init");
+	
+	animatieLoopTimer = setInterval(animatieLoop, 200);
+	shipAdder = setInterval(shipAdderLoop, 200);
+}
+function stop() {
+	clearInterval(animatieLoopTimer);
+	clearInterval(shipAdder);
+}
+function addBadAlienShip() {
+	$('#space').append("<div id=badAlienShip" + numShips + " class='badAlienShip'></div>");
+	var newShip = $('#badAlienShip' + numShips);
+
+	var leftPos = $(window).width();
+	var topPos = Math.round(Math.random*$(window).height());
+
+	$(newShip).css({"margin-left": leftPos, "margin-top": topPos});
+	$(newShip).on('click', function() {
+		console.log('badAlienShip' + numShips + ' attacked...');
+	});
+	numShips++;
+}
+function shipAdderLoop() {
+	if( Math.random() < 0.2 ) {
+		console.log('adding bad alien ship');
+		addBadAlienShip();
+	}
+}
+function animatieLoop() {
+	console.log("animatieLoop");
+	$(".badAlienShip").css({"margin-left": "-=5px"});
+}
+</script>
+</head>
+<body>
+<div id='space'></div>
+<script>
+init();
+</script>
+</body>
+</html>
