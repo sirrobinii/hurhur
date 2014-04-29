@@ -28,7 +28,7 @@ function stop() {
 	clearInterval(shipAdder);
 }
 function addBadAlienShip() {
-	$('#space').append("<div id=badAlienShip" + numShips + " class='badAlienShip'></div>");
+	$('#space').append("<div id='badAlienShip" + numShips + "' class='badAlienShip'></div>");
 	var newShip = $('#badAlienShip' + numShips);
 
 	var leftPos = $(window).width();
@@ -37,6 +37,7 @@ function addBadAlienShip() {
 	$(newShip).css({"margin-left": leftPos, "margin-top": topPos});
 	$(newShip).on('click', function() {
 		console.log('badAlienShip' + numShips + ' attacked...');
+		$(this).fadeOut();
 	});
 	numShips++;
 }
